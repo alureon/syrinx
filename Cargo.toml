@@ -1,0 +1,13 @@
+[package]
+name = "manual_map_pe"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+anyhow = "1.0.71"
+clap = { version = "4.2.7", features = ["derive"] }
+pelite = "0.10.0"
+manual_map = { path = "./manual_map" }
+winapi = { version = "0.3.9", features = ["tlhelp32", "handleapi"] }
