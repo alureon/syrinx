@@ -11,3 +11,4 @@ clap = { version = "4.2.7", features = ["derive"] }
 pelite = "0.10.0"
 manual_map = { path = "./manual_map" }
 winapi = { version = "0.3.9", features = ["tlhelp32", "handleapi"] }
+env_logger = "0.10.0"

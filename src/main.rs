@@ -64,6 +64,8 @@ fn main() -> Result<()> {
     let args = Args::parse();
     let path = Path::new(&args.file);
 
+    env_logger::init();
+
     let target_process_id = if let Some(proc_id) = args.process_id {
         proc_id
     } else {
@@ -78,7 +80,7 @@ fn main() -> Result<()> {
     if let Ok(map) = FileMap::open(path) {
         let pe = PeFile::from_bytes(&map)?;
         println!("{:#X}", pe.optional_header().ImageBase);
-        manual_map::map(target_process_id, &pe, true)?;
+        manual_map::map_to_process(target_process_id, &pe, true)?;
     }
 
     Ok(())

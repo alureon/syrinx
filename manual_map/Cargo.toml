@@ -8,4 +8,18 @@ edition = "2021"
 [dependencies]
 pelite = "0.10.0"
 thiserror = "1.0.40"
-winapi = { version = "0.3.9", features = ["processthreadsapi", "handleapi", "wow64apiset", "errhandlingapi", "libloaderapi", "tlhelp32", "winbase"] }
+apiset = { path = "../apiset" }
+log = "0.4.17"
+
+[dependencies.winapi]
+version = "0.3.9"
+features = [
+    "processthreadsapi",
+    "handleapi",
+    "wow64apiset",
+    "errhandlingapi",
+    "libloaderapi",
+    "tlhelp32",
+    "winbase",
+    "winuser"
+]
