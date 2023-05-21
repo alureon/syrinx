@@ -173,6 +173,7 @@ pub fn map(target_proc_id: u32, pe: &PeFile, hijack: bool) -> Result<usize> {
 
     // Check if we need a rebase or not
     if pe.optional_header().ImageBase != (allocation as u64) {
+        let image_base = pe.optional_header().ImageBase;
         // Do base relocation table fixups
         pe.base_relocs()?.for_each(|virt_addr, ty| {
             let ty = ty as u16;
@@ -182,7 +183,7 @@ pub fn map(target_proc_id: u32, pe: &PeFile, hijack: bool) -> Result<usize> {
                     let slice: [u8; 8] = image[virt_addr..virt_addr+8]
                         .try_into()
                         .expect("Could not convert to slice");
-                    let value = u64::from_le_bytes(slice)
+                    let value = (u64::from_le_bytes(slice) - image_base)
                         + allocation as u64;
                     image[virt_addr..virt_addr+8]
                         .copy_from_slice(&value.to_le_bytes());
